@@ -10,7 +10,22 @@ import SwiftUI
 
 struct ContentView : View {
     var body: some View {
-        Text("Hello World")
+        Button(action: {
+            self.search()
+        }) {
+            Text(" Search")
+        }
+    }
+
+    private func search() {
+        let client = APIClient()
+        let query = SearchRepositoryQuery(keyword: "Kaeru")
+        client.execute(by: query) { result in
+            switch result {
+            case .success(let response):
+                print(response)
+            }
+        }
     }
 }
 
